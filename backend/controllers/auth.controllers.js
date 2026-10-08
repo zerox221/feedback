@@ -163,12 +163,14 @@ exports.loginController = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      maxAge: 15 * 60 * 1000,
+      secure: true,
+      sameSite: "none",
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: true,
+      sameSite: "none",
     });
 
     res.status(200).json({
@@ -246,14 +248,16 @@ exports.refreshAccessTokenController = async (req, res) => {
       expiresIn: "7d",
     });
 
-    res.cookie("accessToken", newAccessToken, {
+    res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      maxAge: 15 * 60 * 1000,
+      secure: true,
+      sameSite: "none",
     });
 
-    res.cookie("refreshToken", newRefreshToken, {
+    res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 1000,
+      secure: true,
+      sameSite: "none",
     });
 
     res.status(200).json({
@@ -277,7 +281,6 @@ exports.logOutController = async (req, res) => {
       success: true,
       message: "User logged out successfully",
     });
-
   } catch (error) {
     console.log("Error while logging out:", error.message);
     res.status(500).json({

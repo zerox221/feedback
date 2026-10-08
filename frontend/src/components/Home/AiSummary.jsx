@@ -119,7 +119,7 @@ console.log("insights : ",insight)
 
             {/* Summaries */}
             <div className="mt-5 space-y-3">
-              {insight?.summarized_feedback?.map((summary, idx) => (
+              {insight?.feedbacks?.map((summary, idx) => (
                 <div
                   key={idx}
                   className="flex gap-3 rounded-lg bg-gray-50 p-3"

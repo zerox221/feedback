@@ -7,7 +7,7 @@ export const UserContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState(null);
   const [feedbacks, setFeedbacks] = useState([]);
-  const [refresh,setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   async function getAllFeedbacks() {
     setRefresh(true);
@@ -16,7 +16,7 @@ export const UserContextProvider = ({ children }) => {
       setFeedbacks(response.data.feedbacks);
     } catch (error) {
       console.log("error while fetching all feedbacks");
-    }finally{
+    } finally {
       setRefresh(false);
     }
   }
@@ -30,15 +30,10 @@ export const UserContextProvider = ({ children }) => {
     feedbacks,
     setFeedbacks,
     getAllFeedbacks,
-    refresh
+    refresh,
   };
 
   useEffect(() => {
-    getAllFeedbacks();
-  }, []);
-
-  useEffect(() => {
-
     const fetchUser = async () => {
       try {
         const response = await api.get("/auth/get-me");
@@ -51,6 +46,7 @@ export const UserContextProvider = ({ children }) => {
     };
 
     fetchUser();
+    getAllFeedbacks();
   }, []);
 
   return <userContext.Provider value={value}>{children}</userContext.Provider>;

@@ -248,13 +248,13 @@ exports.refreshAccessTokenController = async (req, res) => {
       expiresIn: "7d",
     });
 
-    res.cookie("accessToken", accessToken, {
+    res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
     });
 
-    res.cookie("refreshToken", refreshToken, {
+    res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
       secure: true,
       sameSite: "none",

@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {user , setUser} = useContext(userContext);
+  const {user , setUser, getAllFeedbacks} = useContext(userContext);
 
   async function loginHandler(data){
     if(loading) return;
@@ -23,9 +23,10 @@ const LoginForm = () => {
         if(response.data.success === true){
             setUser(response.data.user);
             navigate("/dashboard");
+              getAllFeedbacks();
         }
-
         reset();
+
     } catch (error) {
         if(error.response && error.response.data) {
             setErrors(error.response.data.message);
